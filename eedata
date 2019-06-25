@@ -6,13 +6,13 @@ function eedata() {
   if [[ -z $html ]]
   then
     echo 'Error: Unable to establish a connection to EE.'
-  elif [[ $(echo $html | pup 'title text{}') == 'Error' ]]
+  elif [[ $(pup 'title text{}' <<< $html) == 'Error' ]]
   then
     echo 'Error: The default route is not via EE.'
   else
-    echo $html | pup 'span.allowance__left text{}' | tr -d '\n' | awk '{$2=$2};1'
-    echo $html | pup 'p.allowance__timespan text{}' | tr -d '\n' | awk '{$2=$2};1'
-    echo $html | pup 'div.allowance__recurrence-info text{}' | tr -d '\n' | awk '{$2=$2};1'
-    echo $html | pup 'div.free-data__content text{}' | tr -d '\n' | awk '{$2=$2};1'
+    pup 'span.allowance__left text{}' <<< $html | tr -d '\n' | awk '{$2=$2};1'
+    pup 'p.allowance__timespan text{}' <<< $html | tr -d '\n' | awk '{$2=$2};1'
+    pup 'div.allowance__recurrence-info text{}' <<< $html | tr -d '\n' | awk '{$2=$2};1'
+    pup 'div.free-data__content text{}' <<< $html | tr -d '\n' | awk '{$2=$2};1'
   fi
 }
