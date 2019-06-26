@@ -10,9 +10,9 @@ function eedata() {
   then
     echo 'Error: The default route is not via EE.'
   else
-    pup 'span.allowance__left text{}' <<< $html | tr -d '\n' | awk '{$2=$2};1'
-    pup 'p.allowance__timespan text{}' <<< $html | tr -d '\n' | awk '{$2=$2};1'
-    pup 'div.allowance__recurrence-info text{}' <<< $html | tr -d '\n' | awk '{$2=$2};1'
-    pup 'div.free-data__content text{}' <<< $html | tr -d '\n' | awk '{$2=$2};1'
+    pup 'span.allowance__left text{}' <<< $html | tr -d '\n' | awk '{$1=$1};1'
+    pup 'p.allowance__timespan text{}' <<< $html | tr -d '\n' | awk '{$1=$1};1'
+    pup 'div.allowance__recurrence-info text{}' <<< $html | tr -d '\n' | awk '{$1=$1};1'
+    pup 'div.free-data__content text{}' <<< $html | tr -d '\n' | awk '{$1=$1};1'
   fi
 }
