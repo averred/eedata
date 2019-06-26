@@ -3,16 +3,20 @@
 function eedata() {
   local url='http://add-on.ee.co.uk/status'
   local html=$(curl -s $url)
+  local title=$(pup 'title text{}' <<< $html)
   if [[ -z $html ]]
   then
     echo 'Error: Unable to establish a connection to EE.'
-  elif [[ $(pup 'title text{}' <<< $html) == 'Error' ]]
+  elif [[ $title == 'Error' ]]
   then
     echo 'Error: The default route is not via EE.'
+  elif [[ $title == 'EE – My Data' ]]
+  then
+    pup 'span.allowance__left text{}' <<< $html | xargs
+    pup 'p.allowance__timespan text{}' <<< $html | xargs
+    pup 'div.allowance__recurrence-info text{}' <<< $html | xargs
+    pup 'div.free-data__content text{}' <<< $html | xargs
   else
-    pup 'span.allowance__left text{}' <<< $html | tr -d '\n' | awk '{$1=$1};1'
-    pup 'p.allowance__timespan text{}' <<< $html | tr -d '\n' | awk '{$1=$1};1'
-    pup 'div.allowance__recurrence-info text{}' <<< $html | tr -d '\n' | awk '{$1=$1};1'
-    pup 'div.free-data__content text{}' <<< $html | tr -d '\n' | awk '{$1=$1};1'
+    echo 'Error: Unknown error.'
   fi
 }
