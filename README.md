@@ -1,6 +1,6 @@
 # eedata
-Shell function to retrieve EE data usage.
-I wrote this because I spend a lot of time in terminal and a lot of time tethered to my mobile phone.
+Shell function to retrieve EE data usage.  
+I wrote this because I spend a lot of time in terminal and a lot of time tethered to my mobile phone.  
 It may work with other shells but I have only tested in Zsh and Bash.
 
 ## Prerequisites
