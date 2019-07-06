@@ -12,7 +12,7 @@ function eedata() {
     echo 'Error: The default route is not via EE.'
   elif [[ $title == 'EE – My Data' ]]
   then
-    pup 'span.allowance__left text{}' <<< $html | xargs
+    pup 'span.allowance__left text{}' <<< $html | xargs | awk '{print $4-$1substr($4, length($4)-1)" used ("$1"/"$4" remaining)"}'
     pup 'p.allowance__timespan text{}' <<< $html | xargs
     pup 'div.allowance__recurrence-info text{}' <<< $html | xargs
     pup 'div.free-data__content text{}' <<< $html | xargs
